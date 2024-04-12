@@ -1,0 +1,36 @@
+// this is the prisma file that'll hold mock data
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "sqlite"
+    url = env("DATABASE_URL")
+    // directUrl = env("DIRECT_URL")
+}
+
+model Contact {
+    id Int @id @default(autoincrement())
+    jobTitle String @map(name: "job_title")
+    department String 
+    owner User? @relation(fields: [ownerId], references: [id])
+    ownerId Int?
+}
+
+model User {
+    id  Int  @id @default(autoincrement())
+    name String
+    phone String @unique
+    email String @unique
+    address String
+    createdAt DateTime  @default(now()) @map(name: "created_at")
+    updatedAt DateTime  @updatedAt @map(name: "updated_at")
+    contacts Contact[]
+}
+
+model Department {
+    id Int @id @default(autoincrement())
+    name String
+    description String?
+}
