@@ -32,3 +32,14 @@ export const addUsers = async (formData: FormData) => {
   // Revalidating the root path to update the cache after adding a new user
   revalidatePath("/"); // we'll use this whenever we create a contact as well
 };
+
+export const getUserById = async (id: number) => {
+  try {
+    const user = await prisma.user.findFirst({ where: { id } });
+
+    return user;
+  } catch (error) {
+    console.error("Failed to retrieve user:", error);
+    return null;
+  }
+};
