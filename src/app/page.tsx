@@ -8,13 +8,16 @@ import { ContactHead } from "@/components/contact_head";
 // This is the main component for the index page.
 export default async function Home() {
   // Fetching departments and users from the database using Prisma.
-  const departments = await prisma.department.findMany();
   const contacts = await prisma.contact.findMany();
 
   const table_data = contacts.map((contact) => ({
     name: <OwnerComp ownerId={contact.ownerId!} />,
     "Job Title": contact.jobTitle,
-    department: contact.department,
+    department: (
+      <span className="py-2 flex justify-center bg-purple-50 text-purple-500 w-fit px-3 rounded-full">
+        {contact.department}
+      </span>
+    ),
   }));
 
   return (

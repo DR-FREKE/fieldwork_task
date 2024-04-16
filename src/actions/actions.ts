@@ -43,3 +43,13 @@ export const getUserById = async (id: number) => {
     return null;
   }
 };
+
+export const getDepartments = async () => {
+  try {
+    const departments = await prisma.department.findMany();
+    return departments;
+  } catch (error) {
+    console.error("Failed to retrieve departments:", error);
+    return null;
+  }
+};

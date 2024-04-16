@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { AppButton } from "./button";
 import { TextField } from "./input";
 import { addUsers } from "@/actions/actions";
+import { Phone, TextFields } from "@mui/icons-material";
 
 export default function AccountForm() {
   const form_ref = useRef<HTMLFormElement>(null); // Reference to the form element
@@ -35,6 +36,7 @@ export default function AccountForm() {
           placeholder="Account Name"
           name="account_name"
           label="Name"
+          icon={<TextFields />}
           required
         />
         <TextField
