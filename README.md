@@ -14,7 +14,7 @@ npx prisma db seed
 To start the Prisma server, follow these steps:
 
 1. Navigate to the root directory of the project.
-2. Run the following command to start the Prisma server:
+2. Run the following command to start the Prisma server which will most likely run on [http://localhost:5555](http://localhost:555):
    ```bash
    npx prisma studio
    ```
