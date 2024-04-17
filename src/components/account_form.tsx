@@ -13,10 +13,10 @@ export default function AccountForm() {
     form_ref.current?.reset(); // Reset the form fields after submission
 
     const response = await addUsers(formData); // Call the addUsers action with the form data
-    const { error } = response as { error?: string }; // Destructure the error from the response, if any
+    // const { error } = response as { error?: string }; // Destructure the error from the response, if any
 
-    if (error) {
-      alert(error); // Display the error message to the user...we could use one of those toast package
+    if (response?.error) {
+      alert(response.error); // Display the error message to the user...we could use one of those toast package
     }
   };
 

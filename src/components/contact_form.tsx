@@ -48,9 +48,9 @@ export default function ContactForm({ onClose }: { onClose: Function }) {
     const response = await addContacts(formData); // Call the addUsers action with the form data
     // const { error } = response as { error?: string }; // Destructure the error from the response, if any
 
-    // if (error) {
-    //   alert(error); // Display the error message to the user...we could use one of those toast package
-    // }
+    if (response?.error) {
+      alert(response.error); // Display the error message to the user...we could use one of those toast package
+    }
     onClose();
   };
 
