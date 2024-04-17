@@ -14,6 +14,7 @@ type Ref = HTMLInputElement;
 type ModalTransitionProps = {
   children: React.ReactElement<any, any>;
 } & TransitionProps;
+
 type ModalProps = {
   open: boolean;
   closeModal: Function;

@@ -56,7 +56,7 @@ export const TextField = React.forwardRef<Ref, InputFieldProps>(
 
 export const SelectField = React.forwardRef<Ref, SelectFieldProps<any>>(
   (props, ref) => {
-    const [selected, setSelected] = useState<ReactNode>();
+    const [selected, setSelected] = useState<any>("");
 
     const handleChange = (event: { target: { value: ReactNode } }) => {
       setSelected(event.target.value);
@@ -68,15 +68,18 @@ export const SelectField = React.forwardRef<Ref, SelectFieldProps<any>>(
         </div>
         <FormControl className="w-4/6 outline-none rounded-md">
           <Select
-            value={selected}
+            value={
+              selected[props.set_value_as as string] || (selected as string)
+            }
             displayEmpty
+            name={props.name}
             onChange={handleChange}
             renderValue={(select) => {
               if (!select) {
                 return <span className="opacity-45">{props.placeholder}</span>;
               }
 
-              return [select].join(", ");
+              return selected[props.view_by as string] || (selected as string);
             }}
           >
             <MenuItem value="">

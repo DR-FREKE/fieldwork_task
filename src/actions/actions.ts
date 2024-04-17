@@ -28,9 +28,6 @@ export const addUsers = async (formData: FormData) => {
     // Returning error object in case of any failure during user creation
     return { error };
   }
-
-  // Revalidating the root path to update the cache after adding a new user
-  revalidatePath("/"); // we'll use this whenever we create a contact as well
 };
 
 export const getUserById = async (id: number) => {
@@ -52,4 +49,39 @@ export const getDepartments = async () => {
     console.error("Failed to retrieve departments:", error);
     return null;
   }
+};
+
+export const getUsers = async () => {
+  try {
+    const users = await prisma.user.findMany();
+    return users;
+  } catch (error) {
+    console.error("Failed to retrieve users:", error);
+    return null;
+  }
+};
+
+export const addContacts = async (formData: FormData) => {
+  const jobTitle = formData.get("jobTitle");
+  const department = formData.get("department");
+  const ownerId = formData.get("owner");
+
+  try {
+    // Creating a new contact record in the database
+    await prisma.contact.create({
+      data: {
+        jobTitle: jobTitle as string,
+        department: department as string,
+        owner: {
+          connect: { id: parseInt(ownerId as string, 10) },
+        },
+      },
+    });
+  } catch (error) {
+    // Returning error object in case of any failure during user creation
+    return { error };
+  }
+
+  // Revalidating the root path to update the cache after adding a new user
+  revalidatePath("/"); // we'll use this whenever we create a contact as well
 };
